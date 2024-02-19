@@ -1,0 +1,13 @@
+version: '2'
+services:
+  api-test-texo-frontend:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: api-test-texo-frontend:latest
+    ports:
+      - "14200:80"
+    hostname: api-test-texo-frontend
+networks:
+  spring-cloud-network:
+    driver: bridge
