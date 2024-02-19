@@ -1,0 +1,61 @@
+<div class="card">
+  <h3>List movies</h3>
+  <table>
+    <thead>
+    <tr>
+      <th class="col-3">ID</th>
+      <th class="col-3">
+        <div class="col-auto">Year</div>
+        <div class="col-auto">
+          <input placeholder="Filter by year" [(ngModel)]="searchBy.year" type="number" (change)="searchFilter()">
+        </div>
+      </th>
+      <th class="col-3">Title</th>
+      <th class="col-3">
+        <div class="col-auto">Winner?</div>
+        <div class="col-auto">
+          <select [(ngModel)]="searchBy.winner" (change)="searchFilter()">
+            <option value="null">Yes/No</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+      </th>
+    </tr>
+    <!--      <tr>-->
+    <!--        <th style="width: 25%">ID</th>-->
+    <!--        <th style="width: 25%" rowspan="1">Year</th>-->
+    <!--        <th style="width: 25%">Title</th>-->
+    <!--        <th style="width: 25%" rowspan="1">Winner?</th>-->
+    <!--      </tr>-->
+    <!--      <tr>-->
+    <!--        <th style="width: 25%"></th>-->
+    <!--        <th style="width: 25%"><input placeholder="Filter by year" [(ngModel)]="searchBy.year" type="number"></th>-->
+    <!--        <th style="width: 25%"></th>-->
+    <!--        <th style="width: 25%">-->
+    <!--          <select [(ngModel)]="searchBy.winner" (change)="search()">-->
+    <!--            <option value="null">Yes/No</option>-->
+    <!--            <option value="yes">Yes</option>-->
+    <!--            <option value="no">No</option>-->
+    <!--          </select>-->
+    <!--        </th>-->
+    <!--      </tr>-->
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of listMovies">
+      <td>{{ item.id }}</td>
+      <td>{{ item.year }}</td>
+      <td>{{ item.title }}</td>
+      <td>{{ (item.winner ? 'Yes' : 'No') }}</td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+      <td colspan="4">
+        <app-page-navigator [resultSetProjection]="resultSet"
+                            (updateSearchEvent)="currentPage = $event;search()"></app-page-navigator>
+      </td>
+    </tr>
+    </tfoot>
+  </table>
+</div>

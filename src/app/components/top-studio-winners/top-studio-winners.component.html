@@ -1,0 +1,19 @@
+<div class="card">
+  <h3>Top 3 studios with winners</h3>
+  <div class="content">
+    <table>
+      <thead>
+      <tr>
+        <td>Name</td>
+        <td>Win Count</td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of resultSet">
+        <td>{{item.name}}</td>
+        <td>{{item.winCount}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="card">
+  <h3>List movie winners by year</h3>
+  <div class="row">
+    <div class="col-10">
+      <input id="year_search" name="year_search" class="form-control" type="number" [(ngModel)]="searchBy.year"
+             placeholder="Search by year">
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-primary" style="font-size: 0px" (click)="search()">
+        <span>
+          <i class="material-icons">search</i>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <table style="margin-top: 15px">
+    <thead>
+    <tr>
+      <td>Id</td>
+      <td>Year</td>
+      <td>Title</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of resultSet">
+      <td>{{ item.id }}</td>
+      <td>{{ item.year }}</td>
+      <td>{{ item.title }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

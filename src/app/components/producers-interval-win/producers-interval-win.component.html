@@ -1,0 +1,41 @@
+<div class="card">
+  <h3>Producers with longest and shortest interval between wins</h3>
+  <h4 class="h4-left">Maximum</h4>
+  <table>
+    <thead>
+      <tr>
+        <td class="col-3">Producer</td>
+        <td class="col-3">Interval</td>
+        <td class="col-3">Previous Win</td>
+        <td class="col-3">Following Win</td>
+      </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of resultSetMax">
+      <td>{{item.producer}}</td>
+      <td>{{item.interval}}</td>
+      <td>{{item.previousWin}}</td>
+      <td>{{item.followingWin}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <h4 class="h4-left" style="padding-top: 20px">Minimum</h4>
+  <table>
+    <thead>
+    <tr>
+      <td class="col-3">Producer</td>
+      <td class="col-3">Interval</td>
+      <td class="col-3">Previous Win</td>
+      <td class="col-3">Following Win</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of resultSetMin">
+      <td>{{item.producer}}</td>
+      <td>{{item.interval}}</td>
+      <td>{{item.previousWin}}</td>
+      <td>{{item.followingWin}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

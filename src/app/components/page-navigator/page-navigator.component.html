@@ -1,0 +1,26 @@
+<div class="row col-12 paginator">
+  <div class="col-auto cursor-paginator" (click)="updateSearch(1)">
+    <span class="material-icons icon-paginator">
+      first_page
+    </span></div>
+  <div class="col-auto cursor-paginator" (click)="updateSearch(resultSetProjection.pageable.pageNumber)">
+    <span class="material-icons icon-paginator">
+      arrow_left
+    </span>
+  </div>
+  <div class="col-sm-auto">
+    <div class="col-12">
+      <div class="col-auto btn btn-navigator" [class.btn-primary]="(item === resultSetProjection.pageable.pageNumber+1)" *ngFor="let item of listPagesAvaliable" (click)="updateSearch(item)">{{ item }}</div>
+    </div>
+  </div>
+  <div class="col-auto cursor-paginator" (click)="updateSearch(resultSetProjection.pageable.pageNumber+2)">
+    <span class="material-icons icon-paginator">
+      arrow_right
+    </span>
+  </div>
+  <div class="col-auto cursor-paginator" (click)="updateSearch(resultSetProjection.totalPages+1)">
+    <span class="material-icons icon-paginator">
+      last_page
+    </span>
+  </div>
+</div>

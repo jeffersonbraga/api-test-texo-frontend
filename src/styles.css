@@ -1,0 +1,126 @@
+/* Global Styles */
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+h1 {
+  color: #264D73;
+  font-size: 2.5rem;
+}
+h2, h3 {
+  color: #444;
+  font-weight: lighter;
+}
+h3 {
+  font-size: 1.3rem;
+}
+body {
+  min-width: 768px;
+  min-height: 1280px;
+}
+
+table {
+  width: 100%;
+  text-align: left;
+}
+
+td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  border: 1px solid #c8c8c8;
+}
+
+th {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  border-right: 1px solid #c8c8c8;
+  width: 25%;
+}
+
+th div select {
+  width: 90%;
+  padding: 10px;
+  text-align: center;
+}
+
+th div input {
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 90%;
+  padding: 6px;
+  text-align: left;
+}
+
+table thead tr:nth-child(odd) {
+  font-weight: bold;
+  text-align: left;
+  border: 1px solid #c8c8c8;
+  border-bottom: 0;
+}
+
+table thead tr td {
+  font-weight: bold;
+}
+
+table thead tr th {
+  font-weight: bold;
+  text-align: center;
+}
+
+table thead tr {
+  background-color: #f4f4f4;
+}
+
+table tfoot tr {
+  background-color: #f4f4f4;
+}
+
+table tbody tr:nth-child(even){
+  background-color: #f9f9f9;
+}
+
+.card {
+  margin-top: 25px;
+  padding: 20px;
+  border: 1px;
+  box-shadow: 0 1px 1px 1px #b0b0b0;
+  min-height: 330px;
+}
+
+div .card h3 {
+  font-weight: bold;
+  text-align: left;
+  padding-bottom: 10px;
+}
+
+.h4-left {
+  text-align: left;
+}
+
+.btn-navigator {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.icon-paginator {
+  font-size: 36px;
+}
+
+.cursor-paginator {
+  cursor: pointer;
+}
+
+.paginator {
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.app-menu {
+  background-color: #f8f9fa;
+  padding-left: 2rem;
+}
+
+.app-component{
+  height: 100vh;
+}

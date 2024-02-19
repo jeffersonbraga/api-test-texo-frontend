@@ -1,0 +1,17 @@
+<div class="card">
+  <h3>List years with multiple winners</h3>
+  <table>
+    <thead>
+    <tr>
+      <td>Year</td>
+      <td>Win Count</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of resultSet">
+      <td>{{ item.year }}</td>
+      <td>{{ item.winnerCount }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
