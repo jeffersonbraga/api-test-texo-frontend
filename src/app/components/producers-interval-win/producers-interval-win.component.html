@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let item of resultSetMax">
+    <tr *ngFor="let item of (resultSet$ | async)?.max">
       <td>{{item.producer}}</td>
       <td>{{item.interval}}</td>
       <td>{{item.previousWin}}</td>
@@ -30,7 +30,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let item of resultSetMin">
+    <tr *ngFor="let item of (resultSet$ | async)?.min">
       <td>{{item.producer}}</td>
       <td>{{item.interval}}</td>
       <td>{{item.previousWin}}</td>

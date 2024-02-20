@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {IntervalWinners} from "../../model/interval-winners";
 import {ProducerService} from "../../services/producer.service";
+import {map, Observable, shareReplay, tap} from "rxjs";
+import {IntervalMaxMin} from "../../model/interval-max-min";
 
 @Component({
   selector: 'app-producers-interval-win',
@@ -8,17 +10,11 @@ import {ProducerService} from "../../services/producer.service";
 })
 export class ProducersIntervalWinComponent implements OnInit {
 
-  resultSetMax!: IntervalWinners[];
-  resultSetMin!: IntervalWinners[];
+  resultSet$ = new Observable<IntervalMaxMin>();
+
   constructor(private intervalBetweenWinService:ProducerService) {
   }
   ngOnInit(): void {
-    this.intervalBetweenWinService.maxminInterval().subscribe(
-      res => {
-        this.resultSetMax = res["max"];
-        this.resultSetMin = res["min"];
-      }, error => {
-
-      });
+    this.resultSet$ = this.intervalBetweenWinService.maxminInterval().pipe(shareReplay());
   }
 }

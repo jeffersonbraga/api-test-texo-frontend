@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {ResultSetProjection} from "../../model/result-set-projection";
+import {Observable, tap} from "rxjs";
 
 @Component({
   selector: 'app-page-navigator',
@@ -8,47 +9,52 @@ import {ResultSetProjection} from "../../model/result-set-projection";
 export class PageNavigatorComponent implements OnChanges {
 
   @Input("resultSetProjection")
-  resultSetProjection!: ResultSetProjection;
+  resultSetProjection$! : Observable<ResultSetProjection>;
+
+  resultProjection! : ResultSetProjection;
 
   @Output()
   updateSearchEvent: EventEmitter<any> = new EventEmitter();
 
   listPagesAvaliable!:number[];
 
+  totalPages!:number;
+
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("this.resultSetProjection.totalPages:", this.resultSetProjection?.totalPages)
-    console.log("ngOnChanges")
     this.updateNavigatorBar();
   }
 
   private updateNavigatorBar() {
-    if (this.resultSetProjection) {
+    this.resultSetProjection$.subscribe(res => {
+
       this.listPagesAvaliable = [];
-      if (this.resultSetProjection?.totalPages < 5) {
-        for(let i = 1; i <= this.resultSetProjection?.totalPages; i++){
+      this.totalPages = res.totalPages;
+      this.resultProjection = res;
+      if (res.totalPages < 5) {
+        for(let i = 1; i <= res.totalPages; i++){
           this.listPagesAvaliable.push(i);
         }
       } else {
 
-        let countPagesFrom = this.resultSetProjection.pageable.pageNumber + 1;
+        let countPagesFrom = res.pageable.pageNumber + 1;
         let countPagesTo = countPagesFrom + 4;
 
-        if (countPagesTo > this.resultSetProjection.totalPages) {
-          countPagesTo = this.resultSetProjection.totalPages;
-          countPagesFrom = this.resultSetProjection.totalPages - 4;
+        if (countPagesTo > res.totalPages) {
+          countPagesTo = res.totalPages;
+          countPagesFrom = res.totalPages - 4;
         }
 
         for(let i = countPagesFrom; i <= countPagesTo; i++){
           this.listPagesAvaliable.push(i);
         }
       }
-    }
+    });
   }
 
   updateSearch(idx: number) {
 
-    if(idx > this.resultSetProjection.totalPages) {
-      idx = this.resultSetProjection.totalPages;
+    if(idx > this.totalPages) {
+      idx = this.totalPages;
     }
 
     if(idx < 1) {

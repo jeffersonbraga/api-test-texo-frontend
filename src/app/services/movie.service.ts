@@ -18,21 +18,11 @@ export class MovieService extends BaseServiceService {
 
   search(page: number, size: number, winner: any, year: any): Observable<any> {
     let url = this.composeURL(page, size, winner, year);
-    return this.http.get<any>(
-      `${environment.urlApi}${url}`
-    ).pipe(
-      tap(r => this.extractData(r)),
-      catchError(this.handleError<any>('Erro buscar'))
-    );
+    return this.http.get<any>(`${environment.urlApi}${url}`);
   }
 
   winnerByYear(year: number): Observable<any> {
-    return this.http.get<any>(
-      `${environment.urlApi}?winner=true&year=${year}`
-    ).pipe(
-      tap(r => this.extractData(r)),
-      catchError(this.handleError<any>('Erro buscar'))
-    );
+    return this.http.get<any>(`${environment.urlApi}?winner=true&year=${year}`);
   }
 
   private composeURL(page: number, size: number, winner: any, year: any) {

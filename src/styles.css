@@ -124,3 +124,7 @@ div .card h3 {
 .app-component{
   height: 100vh;
 }
+
+.card-list-movies {
+  min-height: 910px;
+}

@@ -17,11 +17,6 @@ export class DashboardMultipleWinnersService extends BaseServiceService {
   }
 
   getMultipleYearWinner(): Observable<any> {
-    return this.http.get<any>(
-      `${environment.urlApi}${this.endpoint}`
-    ).pipe(
-      tap(r => this.extractData(r)),
-      catchError(this.handleError<any>('Erro buscar'))
-    );
+    return this.http.get<any>(`${environment.urlApi}${this.endpoint}`);
   }
 }

@@ -1,6 +1,6 @@
-<div class="card">
+<div class="card card-list-movies">
   <h3>List movies</h3>
-  <table>
+  <table class="table-full-size">
     <thead>
     <tr>
       <th class="col-3">ID</th>
@@ -22,37 +22,19 @@
         </div>
       </th>
     </tr>
-    <!--      <tr>-->
-    <!--        <th style="width: 25%">ID</th>-->
-    <!--        <th style="width: 25%" rowspan="1">Year</th>-->
-    <!--        <th style="width: 25%">Title</th>-->
-    <!--        <th style="width: 25%" rowspan="1">Winner?</th>-->
-    <!--      </tr>-->
-    <!--      <tr>-->
-    <!--        <th style="width: 25%"></th>-->
-    <!--        <th style="width: 25%"><input placeholder="Filter by year" [(ngModel)]="searchBy.year" type="number"></th>-->
-    <!--        <th style="width: 25%"></th>-->
-    <!--        <th style="width: 25%">-->
-    <!--          <select [(ngModel)]="searchBy.winner" (change)="search()">-->
-    <!--            <option value="null">Yes/No</option>-->
-    <!--            <option value="yes">Yes</option>-->
-    <!--            <option value="no">No</option>-->
-    <!--          </select>-->
-    <!--        </th>-->
-    <!--      </tr>-->
     </thead>
     <tbody>
-    <tr *ngFor="let item of listMovies">
-      <td>{{ item.id }}</td>
-      <td>{{ item.year }}</td>
-      <td>{{ item.title }}</td>
-      <td>{{ (item.winner ? 'Yes' : 'No') }}</td>
+    <tr *ngFor="let item of ((this.resultSet$ | async)?.content)?((this.resultSet$ | async)?.content):emptyListMovies">
+      <td>{{ item?.id }}</td>
+      <td>{{ item?.year }}</td>
+      <td title="{{ item?.title }}">{{ item?.title }}</td>
+      <td>{{ (item?.winner ? 'Yes' : (item?.winner !== null)?'No':'&nbsp;') }}</td>
     </tr>
     </tbody>
     <tfoot>
     <tr>
       <td colspan="4">
-        <app-page-navigator [resultSetProjection]="resultSet"
+        <app-page-navigator [resultSetProjection]="resultSet$"
                             (updateSearchEvent)="currentPage = $event;search()"></app-page-navigator>
       </td>
     </tr>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {MovieDetail} from "../../model/movie-detail";
 import {MovieService} from "../../services/movie.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-movie-winner-by-year',
@@ -8,16 +9,12 @@ import {MovieService} from "../../services/movie.service";
 })
 export class MovieWinnerByYearComponent {
 
-  resultSet!: MovieDetail[];
+  resultSet$ = new Observable<MovieDetail[]>();
   searchBy: any = {year:null};
   constructor(private movieSearchService:MovieService) {
   }
 
   search(): void {
-    this.movieSearchService.winnerByYear(this.searchBy.year).subscribe(
-      res => {
-        this.resultSet = res;
-      }, error => {
-    });
+    this.resultSet$ = this.movieSearchService.winnerByYear(this.searchBy.year);
   }
 }

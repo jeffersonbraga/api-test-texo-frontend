@@ -13,11 +13,9 @@ export class TopStudioWinnersComponent implements OnInit {
   }
   ngOnInit(): void {
     this.studiosWinService.studioWinCount().subscribe(
-      res => {
+res => {
         res["studios"].length = 3
         this.resultSet = res["studios"];
-      }, error => {
-
       });
   }
 }
