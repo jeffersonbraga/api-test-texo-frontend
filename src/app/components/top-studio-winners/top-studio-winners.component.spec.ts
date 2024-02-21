@@ -1,43 +1,18 @@
-import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TopStudioWinnersComponent } from './top-studio-winners.component';
-import {DashboardMultipleWinnersService} from "../../services/dashboard-multiple-winners.service";
 import {HttpClientModule} from "@angular/common/http";
-import {StudioWinners} from "../../model/studio-winners";
+import {TopStudioWinnersComponent} from "./top-studio-winners.component";
 import {StudioService} from "../../services/studio.service";
-import {of} from "rxjs";
 
 describe('TopStudioWinnersComponent', () => {
   let component: TopStudioWinnersComponent;
   let fixture: ComponentFixture<TopStudioWinnersComponent>;
-  let serviceStub: any;
-  let resultExpected = {
-    "years": [
-      {
-        "year": 1986,
-        "winnerCount": 2
-      },
-      {
-        "year": 1990,
-        "winnerCount": 2
-      },
-      {
-        "year": 2015,
-        "winnerCount": 2
-      }
-    ]
-  };
 
   beforeEach(async () => {
-
-    serviceStub = {
-      studioWinCount: () => of(resultExpected),
-    };
-
     await TestBed.configureTestingModule({
-      imports: [ HttpClientModule ],
+      imports: [HttpClientModule],
       declarations: [TopStudioWinnersComponent],
-      providers: [ {provide: StudioService, useValue: serviceStub} ]
+      providers: [ StudioService ]
     })
     .compileComponents();
 
@@ -50,10 +25,11 @@ describe('TopStudioWinnersComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should receive array list Movies', fakeAsync(() => {
-    fixture.detectChanges();
-    tick(2000);
-    expect(fixture.debugElement.nativeElement.querySelector('tbody').children.length).toEqual(1);
-  }));
-
+  it('should have listed top 3 winners', (done:DoneFn) => {
+    component.resultSet$.subscribe(res => {
+      fixture.detectChanges();
+      expect(fixture.debugElement.nativeElement.querySelector('tbody').children.length).toEqual(3);
+      done();
+    });
+  });
 });

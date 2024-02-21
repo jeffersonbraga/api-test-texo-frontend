@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {StudioWinners} from "../../model/studio-winners";
 import {StudioService} from "../../services/studio.service";
+import {Observable, shareReplay, tap} from "rxjs";
+import {TopStudioWinners} from "../../model/top-studio-winners";
 
 @Component({
   selector: 'app-top-studio-winners',
@@ -8,14 +10,15 @@ import {StudioService} from "../../services/studio.service";
 })
 export class TopStudioWinnersComponent implements OnInit {
 
-  resultSet!: StudioWinners[];
+  resultSet$ = new Observable<TopStudioWinners>();
   constructor(private studiosWinService:StudioService) {
   }
   ngOnInit(): void {
-    this.studiosWinService.studioWinCount().subscribe(
-res => {
-        res["studios"].length = 3
-        this.resultSet = res["studios"];
-      });
+    this.resultSet$ = this.studiosWinService.studioWinCount().pipe(
+      shareReplay(),
+      tap((res) => {
+        res.studios.length = 3;
+        res.studios;
+    }));
   }
 }
